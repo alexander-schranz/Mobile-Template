@@ -1,0 +1,42 @@
+/* Tabs
+------------------*/
+.tab {
+  display: none;
+  &.active {
+    display: block;
+  }
+}
+
+/* Some Style
+------------------*/
+.tabs {
+  padding-top: 30px;
+}
+
+.tab-controls {
+  position: absolute;
+  top: 5px;
+  right: 30px;
+  ul, li {
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+.tab-control {
+  float: right;
+  display: block;
+  background-color: #000;
+  margin-right: 5px;
+  a {
+    display: block;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    &.active {
+      background-color: #fff;
+    }
+  }
+}
