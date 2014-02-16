@@ -55,9 +55,3 @@
     };
 
 })(jQuery);
-
-(function ($) {
-    $(document).ready(function() {
-        $('.tab-controls').Tabs();
-    });
-})(jQuery);

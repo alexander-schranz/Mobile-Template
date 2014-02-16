@@ -207,9 +207,3 @@
     };
 
 })(jQuery);
-
-(function ($) {
-    $(document).ready(function() {
-        $('#content').TouchMenu();
-    });
-})(jQuery);
