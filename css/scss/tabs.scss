@@ -9,14 +9,20 @@
 
 /* Some Style
 ------------------*/
+$tabControlOffsetTop: 5px;
+$tabControlOffsetRight: 30px;
+$tabControlWidth: 25px;
+$tabControlHeight: 25px;
+$tabOffsetTop: 30px;
+
 .tabs {
-  padding-top: 30px;
+  padding-top: $tabOffsetTop;
 }
 
 .tab-controls {
   position: absolute;
-  top: 5px;
-  right: 30px;
+  top: $tabControlOffsetTop;
+  right: $tabControlOffsetRight;
   ul, li {
     list-style: none;
     margin-top: 0;
@@ -32,9 +38,9 @@
   a {
     display: block;
     text-align: center;
-    width: 25px;
-    height: 25px;
-    line-height: 25px;
+    width: $tabControlWidth;
+    height: $tabControlHeight;
+    line-height: $tabControlHeight;
     &.active {
       background-color: #fff;
     }

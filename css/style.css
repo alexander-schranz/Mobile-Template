@@ -23,8 +23,8 @@ body {
   display: block;
   position: absolute;
   width: 80%;
-  max-width: 280px;
-  padding: 10px;
+  max-width: 300px;
+  padding: 0;
   height: 100%;
   overflow: auto;
   overflow-x: hidden;
@@ -56,11 +56,6 @@ body {
 
 /* Some Style
 ------------------*/
-#content {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-}
-
 body,
 #main-menu,
 #sec-menu {
@@ -68,8 +63,6 @@ body,
 }
 
 .menu-bar {
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
   position: absolute;
   top: 0;
   width: 100%;
