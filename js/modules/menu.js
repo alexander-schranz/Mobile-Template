@@ -28,35 +28,40 @@
         var newContentPositionX = $(element).css('left');
         var preventMenu = true;
         var isFirstMove = true;
-
-
-        /*
-        $(options.mainMenu).bind('touchstart', function(e) {
-            e.preventDefault();
-        });
-
-        $(options.secMenu).bind('touchstart', function(e) {
-            e.preventDefault();
-        });
-        */
-
-        element.addEventListener('touchstart', function(e) {
-            var touch = e.touches[0];
-            touchStartPositionX = touch.pageX;
-            touchStartPositionY = touch.pageY;
+        
+        function getX(e) {
+            if (!!e.touches && !!e.touches[0]) {
+                var touch = e.touches[0];
+                return touch.pageX;
+            } else {
+                return e.pageX;
+            }
+        }
+        
+        function getY(e) {
+            if (!!e.touches && !!e.touches) {
+                var touch = e.touches[0];
+                return touch.pageY;
+            } else {
+                return e.pageY;
+            }
+        }
+        
+        function moveStart(e) {
+            touchStartPositionX = getX(e);
+            touchStartPositionY = getY(e);
             elementStartPositionX = parseInt($(this).css('left'));
             preventMenu = true;
             isFirstMove = true;
-        });
-
-        element.addEventListener('touchmove', function(e) {
+        }
+        
+        function move (e) {
             if (isFirstMove) {
-                var touch = e.touches[0];
-                var moveX = touchStartPositionX - touch.pageX;
+                var moveX = touchStartPositionX - getX(e);
+                var moveY = touchStartPositionY - getY(e);
                 if (moveX < 0) {
                     moveX = 0 - moveX;
                 }
-                var moveY = touchStartPositionY - touch.pageY;
                 if (moveY < 0) {
                     moveY = 0 - moveY;
                 }
@@ -69,8 +74,7 @@
             }
             if (!preventMenu) {
                 e.preventDefault();
-                var touch = e.touches[0];
-                newContentPositionX = (touch.pageX - touchStartPositionX + elementStartPositionX);
+                newContentPositionX = (getX(e) - touchStartPositionX + elementStartPositionX);
                 var maxSlide = options.maxSlide;
                 if (options.maxSlide.indexOf('%') != -1) {
                     maxSlide = parseInt(parseInt($(this).width()) / 100 * parseInt(options.maxSlide));
@@ -94,9 +98,9 @@
                     left:  newContentPositionX + 'px'
                 });
             }
-        });
-
-        element.addEventListener('touchend', function(e) {
+        }
+        
+        function moveEnd (e) {
             if (!preventMenu) {
                 e.preventDefault();
                 var minSlide = options.minSlide;
@@ -151,9 +155,9 @@
                 }, options.slideTime);
                 preventMenu = true;
             }
-        });
-
-        $(options.mainMenuButton).click(function(e) {
+        }
+        
+        function buttonClick (e) {
             e.preventDefault();
             var maxSlide = options.maxSlide;
             if (options.maxSlide.indexOf('%') != -1) {
@@ -178,15 +182,22 @@
                 }, options.slideTime);
             }
             return false;
-        });
+        }
 
-        $(element).click(function(e) {
+        function contentClick(e) {
             options.mainIsOpen = false;
             options.secIsOpen = false;
             $(this).animate({
                 left: 0 + 'px'
             }, options.slideTime);
-        });
+        }
+
+        // Bind Functions to Events
+        element.addEventListener('touchstart', moveStart);
+        element.addEventListener('touchmove', move);
+        element.addEventListener('touchend', moveEnd);
+        $(options.mainMenuButton).click(buttonClick);
+        $(element).click(contentClick);
 
         options.callback();
     };
